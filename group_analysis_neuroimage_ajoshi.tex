@@ -84,6 +84,7 @@
 \address[usc]{University of Southern California, Los Angeles, USA}
 
 \begin{abstract}
+We present a method for performing group studies of resting fMRI data.
 
 ||AUM||
 ||Shree Ganeshaya Namaha||
@@ -104,6 +105,80 @@ fMRI \sep ADHD \sep Resting State \sep group differences
 \section{Materials and Methods}
 \label{sec:mat_methods}
 \subsection{brainsync transform}
+
+The recently developed Brainsync transform is an orthogonal transform
+\cite{descoteaux_brainsync:_2017,joshi_are_2018} which can be used
+for comparisons of fMRI scans across subjects that are collected during
+resting state or task. In contrast with existing fMRI analysis methods,
+this transform does not involve dimensionality reduction and also
+preserves the rich dynamical information in fMRI scans. The method
+is based on the observation that rfMRI data exhibit similar overall
+connectivity patterns across subjects, as reflected in the pairwise
+correlations between different brain regions (Figure \ref{fig:brainsync-transform-illustartion}).
+As an input, the following illustration assumes preprocessed fMRI
+data, sampled on the cortical surface or in the grayordinate coordinate
+system developed by the Human Connectome Project team \cite{glasser_minimal_2013}.
+The time series at each voxel was normalized to mean zero and unit
+variance. Due to normalization, (zero mean, unit variance) the rfMRI
+time series data can be represented as a set of labeled points on
+the hypersphere. The similarity of resting connectivity patterns across
+subjects (reflecting the existence of common networks: default mode,
+visual, somatomotor, etc) results in clusters of points on the hypersphere,
+separated from each other by a distance that reflects the correlation
+between the corresponding time series. As a result, each subject's
+data can be represented as a set of points on the hypersphere, differing
+(approximately) across subjects by a rotation and or reflection of
+the sphere. Alignment of time series across subjects can, therefore,
+be approximately achieved by rotating their respective hyperspheres
+so that they match. This process is illustrated in Figure \ref{fig:brainsync-transform-illustartion}
+and is the basis for the BrainSync transform. The BrainSync mapping
+between subjects requires the solution of a Procrustes least-squares
+fit \cite{gower_procrustes_2004,ten_berge_orthogonal_1977} to compute
+an orthogonal matrix of dimension equal to the number of images making
+up the fMRI time-series. While the synchronization makes the time
+courses of the two datasets similar, individual variation is retained
+after the transformation as manifested in the differences in spatial
+activation patterns between the reference and synchronized subject
+data. This is to be expected and is an important feature of the proposed
+transform: the BrainSync transform aligns the components of the spatiotemporal
+data that are common (with respect to their representation in the
+hypersphere) but also retains any individual differences. The BrainSync
+transform is unique, invertible, efficient to compute, and preserves
+the connectivity structure of the original data for all subjects.
+Similar to image registration, where we spatially align the anatomical
+brain images, synchronization of fMRI signals by the BrainSync transform,
+across a population or within-subject across sessions, facilitates
+longitudinal and cross-sectional studies of fMRI.
+
+This transform was developed to be able to compare two resting state
+scans, for within or across subjects. In its original form, it has
+following limitations. 1. The scans that are being synchronized need
+to have the same number of time points. The entire scans were `synchronized'
+in order to compare them. 2. The temporal dynamics is not captured
+within resting state, however across subject deviation from the average
+dynamics can be captured.
+
+In this work, we develop a weighted extension of the BrainSync transform
+with a scaling factor, that facilitates study of temporal dynamics
+within scan.
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width=1\textwidth]{figs/brainsync_concept} 
+\par\end{centering}
+\caption{Illustration of the BrainSync concept: (a) Data from motor (red),
+cingulate (green) and visual (blue) areas was considered. Representation
+of this data on a hypersphere is depicted. Dimensionality reduction
+was performed using PCA. (b) Two datasets (subject and reference)
+from these areas was used as input to PCA. Dimensionality of the data
+was reduced to 3D and renormalized to generate the mapping to sphere.
+Application of BrainSync to the subject results in a configuration
+of data on the sphere very similar to that for the reference dataset.
+The lower figure shows representative resting fMRI time-series for
+two subjects for a single cortical location before and after synchronization.
+Note the strong correlation of the blue and red time-series curves
+from the two different subjects after synchronization. \label{fig:brainsync-transform-illustartion}}
+\end{figure}
 
 \subsection{Statistical analysis}
 
