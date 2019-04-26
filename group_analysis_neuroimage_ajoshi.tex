@@ -51,7 +51,7 @@
 \begin{document}
 
 \begin{frontmatter}
-\title{An atlas-free method for group analysis of resting state fMRI using brainsyn transform}
+\title{An atlas-free method for group analysis of resting state fMRI using brainsync transform}
 
 %% use the tnoteref command within \title for footnotes;
 %% use the tnotetext command for the associated footnote;
@@ -86,10 +86,9 @@
 \begin{abstract}
 Resting fMRI (rfMRI) can provide insight into function of the human brain. However, due to spontaneous nature of the resting fMRI, the rfMRI scans cannot be compared across subjects.
 
-We present a method for performing group studies of resting fMRI data.
-
-||AUM||
-||Shree Ganeshaya Namaha||
+We present a method for performing group studies of resting fMRI data based on brainsync transform. The proposed method uses ability to perform pairwise comparisons of fMRI scans using the brainsync transform and presents a statistical methodology for group analysis using pairwise comparisons of scans and clinical variables within the group. 
+The proposed method is atlas-free and provides significantly improved sensitivity over atlas-based methods.
+The methodology is applied to a group of ADHD and normal controls to identify brain regions associated with ADHD.
 
 \end{abstract}
 
@@ -100,11 +99,17 @@ fMRI \sep ADHD \sep Resting State \sep group differences
 \end{frontmatter}
 \linenumbers
 
+\begin{enumerate}
+    \item Perform Anatomical analysis also for the same population.
+    
+\end{enumerate}
 
 \section{Introduction}
 \label{sec:introduction}
+The human brain exhibits intricate, complex and dynamic interactions among functional regions during resting offering insight into functional organization of the human brain. The fMRI signal acquired during resting (rfMRI) has been used extensively to measure functional connectivity between different brain regions \citep{horwitz_elusive_2003,lang_resting-state_2014,smith_network_2011, smitha_resting_2017,van_den_heuvel_exploring_2010}. It is also used for longitudinal studies of brain development and is as a diagnostic biomarker in cross-sectional studies for various neurological and psychological diseases and conditions \cite{redcay_intrinsic_2013}. 
 
-
+Group studies of rfMRI involves averaging data across individuals in order to improve the signal-to-noise ratio (SNR) \cite{dubois_building_2016}. 
+Since rfMRI data reflect spontaneous brain activity, it is not possible to directly compare resting state signals across subjects. Instead, comparisons make use of connectivity features \cite{iraji_connectivity_2016}, typically computed from pairwise correlations of the rfMRI time-series between a point of interest and other locations in the brain \cite{fan_human_2016}. For analysis of cerebral cortex, it is common to compute a feature vector at each location on a tessellated representation of the cortex as the correlation from that vertex to all other vertices. 
 
 \section{Materials and Methods}
 \label{sec:mat_methods}
@@ -224,6 +229,7 @@ Another 150 subjects with Verbal IQ/ADHD index scores were used for comparison
 
 
 \bibliographystyle{model1-num-names}
+
 \bibliography{sample.bib,zotero_ref.bib}
 
 
