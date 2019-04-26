@@ -51,7 +51,7 @@
 \begin{document}
 
 \begin{frontmatter}
-\title{Unnecessarily Complicated Research Title}
+\title{An atlas-free method for group analysis of resting state fMRI using brainsyn transform}
 
 %% use the tnoteref command within \title for footnotes;
 %% use the tnotetext command for the associated footnote;
@@ -84,6 +84,8 @@
 \address[usc]{University of Southern California, Los Angeles, USA}
 
 \begin{abstract}
+Resting fMRI (rfMRI) can provide insight into function of the human brain. However, due to spontaneous nature of the resting fMRI, the rfMRI scans cannot be compared across subjects.
+
 We present a method for performing group studies of resting fMRI data.
 
 ||AUM||
@@ -101,6 +103,8 @@ fMRI \sep ADHD \sep Resting State \sep group differences
 
 \section{Introduction}
 \label{sec:introduction}
+
+
 
 \section{Materials and Methods}
 \label{sec:mat_methods}
@@ -181,11 +185,37 @@ from the two different subjects after synchronization. \label{fig:brainsync-tran
 \end{figure}
 
 \subsection{Statistical analysis}
+\subsubsection{Univariate statistic}
+Synchronize all subjects to an atlas
+Use distance to the atlas as a univariate feature
+Correlate this statistic to clinical variable
+Use Pearson correlation to compute p-value at each point on the cortex
 
-\subsection{Subsection Two}
+We computed regression variable for subject i as 
+
+Functional measure is norm of the distance of synced time series to average time series
+
+Pearson correlation and p-value was computed at each vertex
+
+\subsubsection{Multivariate statistic}
+
+\subsubsection{Alternate Univariate Statistic}
+
+In order to perform regression analysis
+Consider 2000 random pairs of subjects
+Synchronize one to the other 
+Use norm square of the difference between their time series (fmri-diff)
+Compute square of the difference between their clinical variables (var-diff)
+Correlate fmri-diff to var-diff
+Use Pearson correlation to compute p-value at each point in the grayordinates
+Benjamini Hochberg FDR correction is done on the whole grayordinates
+
 
 \section{Results}
-\subsection{ADHD data}
+\subsection{ADHD data and preprocessing}
+ADHD200 dataset from fcon1000 was used and processed using BFP
+50 normal controls were used to find a representative subject. Data from those  50 normal subjects was synced to the representative and averaged to form the ‘atlas’.
+Another 150 subjects with Verbal IQ/ADHD index scores were used for comparison
 
 \section{Discussion}
 
